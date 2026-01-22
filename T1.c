@@ -3,17 +3,14 @@
 int bussi();
 int taxi();
 int rahaa();
-int valinta();
+int valinta(int raha_maara, int bussin_hinta, int taxin_hinta);
 
 int main(void) {
     int bussi_hinta = bussi();
     int taxi_hinta = taxi();
     int raha_maara = rahaa();
-    valinta();
-    //printf("Enter bus ticket price you have:%d\n", bussi_hinta);
-    //printf("Enter taxi trip price:%d\n", taxi_hinta);
-    printf("You have %d", raha_maara);
-    printf(" euros left\n");
+    raha_maara = valinta(raha_maara, bussi_hinta, taxi_hinta);
+    printf("You need to walk.");
     return 0;
 }
 
@@ -38,25 +35,36 @@ int rahaa() {
     return raha_maara;
 }
 
-int valinta() {
+int valinta(int rahan_maara, int bussin_hinta, int taxin_hinta) {
     int valinta;
-    int rahan_maara = rahaa();
-    int bussin_hinta = bussi();
-    int taxin_hinta = taxi();
-    printf("testi\n");
-    while (rahan_maara > bussin_hinta || rahan_maara > taxin_hinta) {
+
+    while (rahan_maara >= bussin_hinta || rahan_maara >= taxin_hinta) {
         printf("Do you want to take\n");
-        printf("1) bus\n");
-        printf("2) taxi\n");
+        printf("1) bus (%d euros)\n", bussin_hinta);
+        printf("2) taxi (%d euros)\n", taxin_hinta);
         scanf("%d", &valinta);
 
         if (valinta == 1) {
-            printf("You chose the bus\n");
-            rahan_maara -= bussin_hinta;
+            if (rahan_maara >= bussin_hinta) {
+                printf("You chose the bus\n");
+                rahan_maara -= bussin_hinta;
+                printf("You have %d euros left\n", rahan_maara);
+            } else {
+                printf("You dont have money for the bus\n");
+                printf("You have %d euros left\n", rahan_maara);
+            }
         }
+
         if (valinta == 2) {
-            printf("You chose a taxi\n");
-            rahan_maara -= taxin_hinta;
+            if (rahan_maara >= taxin_hinta) {
+                printf("You chose a taxi\n");
+                rahan_maara -= taxin_hinta;
+                printf("You have %d euros left\n", rahan_maara);
+            } else {
+                printf("You dont have money for the taxi\n");
+                printf("You have %d euros left\n", rahan_maara);
+            }
         }
     }
+    return rahan_maara;
 }
