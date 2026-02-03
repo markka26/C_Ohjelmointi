@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <OmatFunktiot.h>
 
 int main(void) {
     int kuppi = 7;
@@ -17,12 +16,5 @@ int main(void) {
     printf("Danielin osoite: %d\n", &daniel);
     printf("Kupin osoite: %d\n", *daniel);
     printf("Arvo kupissa: %d\n", **daniel);
-
-    //Input validation funktio
-    if (scanf("%d", &selection) != 1) {
-        while(getchar() != '\n');
-        printf("invalid input\n");
-    }
-
     return 0;
 }
